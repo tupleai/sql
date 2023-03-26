@@ -3,12 +3,11 @@ import fetch from "isomorphic-unfetch";
 const swimmingSchema = `
 Table rDistanceSwimming, columns = [startDate, endDate, value, creationDate]
 - Column value is a numerical column, Unit is meter
-- Column startDate is a DATETIME, the time when I started swimming. column sample Data 2022-03-16 12:39:57 +0800
-- Column endDate is a DATETIME,the time when I finished swimming. column sample Data 2022-03-16 12:39:57 +0800
-- Column creationDate is a DATETIME, the time when the swimming record was created. column sample Data 2022-03-16 12:39:57 +0800
-- Each data record represents one time swimming, and someone may swim multiple times in a day.
+- Column startDate is a DATETIME type and represents the time when I started swimming. An example of the data in this column is "2022-03-16 12:39:57 +0800".
+- Column endDate is a DATETIME type and represents the time when I finished swimming. An example of the data in this column is "2022-03-16 12:39:57 +0800".
+- Column creationDate is a DATETIME type and represents the time when the swimming record was created. An example of the data in this column is "2022-03-16 12:39:57 +0800".
+- This Table is used to store swimming records where each data record represents one episode of swimming, and a person may swim multiple times in a day.
 `;
-
 const translateToHuman = async (
   query,
   apiKey,

@@ -360,8 +360,8 @@ export default function Home() {
                   ? outputText.toUpperCase()
                   : outputText.toLowerCase() ||
                     (isHumanToSql
-                      ? "SELECT * FROM cars WHERE color = 'red'"
-                      : "show me all the cars that are red")}
+                      ? "select sum(value) from rdistanceswimming"
+                      : "How far have I swum in total?")}
               </SyntaxHighlighter>
             </div>
 

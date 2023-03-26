@@ -5,13 +5,13 @@ Table rDistanceSwimming, columns = [value, creationDate]
 - Column value is a numerical column, Unit is meter
 - Column creationDate is a DATETIME type and represents the time when the swimming record was created. An example of the data in this column is "2022-03-16 12:39:57 +0800"
 - This Table is used to store swimming records where each data record represents one episode of swimming, and a person may swim multiple times in a day.
-- must use strftime and substr to handle all the DATETIME type, like strftime('%Y-%m-%d %H:%M:%S', substr(original_string, 1, 19))
+- must use strftime and substr to handle all the DATETIME type
 `;
 
 const translateToSQL = async (query, apiKey, tableSchema = swimmingSchema) => {
   const prompt = `#SQLITE SQL
   ${tableSchema}
-  Let's think step by step, use best practice of writing SQL,
+  Let's think step by step, use best practice of writing SQLITE SQL,
   Translate this natural language query into SQLITE SQL: ${query}
   SQL Query:
   `;

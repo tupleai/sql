@@ -13,7 +13,7 @@ const generateQuestions = async (apiKey, tableSchema = swimmingSchema) => {
   const prompt = `#SQLITE SQL
   ${tableSchema}
 
-  Question {title: string}
+  Question {question: string}
   seed: ${seed}
   
   Please generate 6 distinct questions based on the given information

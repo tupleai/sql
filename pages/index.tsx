@@ -196,8 +196,8 @@ export default function Home() {
                 rows={3}
                 placeholder={
                   isHumanToSql
-                    ? "e.g. show me all the cars that are red"
-                    : "SELECT * FROM cars WHERE color = 'red'"
+                    ? "How far have I swum in total?"
+                    : "select sum(value) from rdistanceswimming"
                 }
                 value={inputText}
                 onChange={handleInputChange}

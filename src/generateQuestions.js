@@ -52,4 +52,4 @@ const generateQuestions = async (apiKey, tableSchema = swimmingSchema) => {
   return data.choices[0].text.trim();
 };
 
-export default translateToHuman;
+export default generateQuestions;

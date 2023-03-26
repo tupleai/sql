@@ -14,7 +14,7 @@ export default async function handler(
   try {
     const result = await generateQuestions(process.env.OPENAI_API_KEY);
     // console.log(res);
-    res.status(200).json({ outputText: result });
+    res.status(200).json(JSON.parse(result));
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error translating to SQL" });

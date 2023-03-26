@@ -88,6 +88,7 @@ export default function Home() {
   }
 
   const isValidTableSchema = (text: string) => {
+    return true;
     console.log(text);
     const pattern = /^CREATE\s+TABLE\s+\w+\s*\((\s*.+\s*,?\s*)+\);?$/i;
     const regex = new RegExp(pattern);
@@ -120,14 +121,14 @@ export default function Home() {
     setCopied({
       isCopied: true,
       isHistory: isHistory,
-      text: text
-    })
-     setTimeout(() => {
+      text: text,
+    });
+    setTimeout(() => {
       setCopied({
         isCopied: false,
         isHistory: isHistory,
-        text: text
-      }) 
+        text: text,
+      });
     }, 3000);
   };
 
@@ -373,7 +374,10 @@ export default function Home() {
                       : buttonStyles.dark
                   }`}
                   onClick={() => handleCopy(outputText, false)}
-                  disabled={!copied?.isHistory && copied?.text === outputText || copied?.isCopied }
+                  disabled={
+                    (!copied?.isHistory && copied?.text === outputText) ||
+                    copied?.isCopied
+                  }
                 >
                   <img
                     src={
@@ -383,9 +387,13 @@ export default function Home() {
                   />
                 </button>
 
-                {!copied?.isHistory && copied?.isCopied && copied.text == outputText && (
-                  <p className="text-black-500 text-xs">Copied to clipboard</p>
-                )}
+                {!copied?.isHistory &&
+                  copied?.isCopied &&
+                  copied.text == outputText && (
+                    <p className="text-black-500 text-xs">
+                      Copied to clipboard
+                    </p>
+                  )}
               </div>
               {isHumanToSql && (
                 <div className="flex items-center ml-4">
@@ -423,7 +431,7 @@ export default function Home() {
 
       {showHistory && (
         <>
-          {history.length > 0 && 
+          {history.length > 0 &&
             history.map((entry: IHistoryEntry, index: number) => (
               <div key={index} className="w-full mb-6">
                 <div className="flex flex-col md:flex-row w-full gap-6 bg-custom-background bg-gray-100 dark:bg-black dark:border-gray-800 border rounded-3xl from-blue-500 p-3">
@@ -516,25 +524,38 @@ export default function Home() {
                         <button
                           className={`flex items-center disabled:pointer-events-none disabled:opacity-70 justify-center space-x-4 rounded-full px-5 py-2 text-sm font-medium transition ${
                             resolvedTheme === "light"
-                            ? buttonStyles.light
-                            : buttonStyles.dark
-                            }`}
-                          onClick={() => handleCopy(safeJSONParse(entry?.outputText), true)}
-                          disabled={copied?.isHistory && JSON.stringify(copied?.text) === entry?.outputText || copied?.isCopied } 
+                              ? buttonStyles.light
+                              : buttonStyles.dark
+                          }`}
+                          onClick={() =>
+                            handleCopy(safeJSONParse(entry?.outputText), true)
+                          }
+                          disabled={
+                            (copied?.isHistory &&
+                              JSON.stringify(copied?.text) ===
+                                entry?.outputText) ||
+                            copied?.isCopied
+                          }
                         >
                           <img
                             src={
-                            resolvedTheme === "light" ? "/copyDark.svg" : "/copy.svg"
+                              resolvedTheme === "light"
+                                ? "/copyDark.svg"
+                                : "/copy.svg"
                             }
                             alt="Copy"
                           />
                         </button>
-                        {copied?.isHistory && copied?.isCopied && copied.text == safeJSONParse(entry?.outputText) && (
-                          <p className="text-black-500 text-xs">Copied to clipboard</p>
-                        )}
-                        </div>
+                        {copied?.isHistory &&
+                          copied?.isCopied &&
+                          copied.text == safeJSONParse(entry?.outputText) && (
+                            <p className="text-black-500 text-xs">
+                              Copied to clipboard
+                            </p>
+                          )}
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             ))}

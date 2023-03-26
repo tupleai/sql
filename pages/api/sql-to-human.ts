@@ -15,11 +15,12 @@ export default async function handler(
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { inputText } = req.body;
+  const { inputText, tableSchema } = req.body;
   try {
     const outputText = await translateToHuman(
       inputText,
-      process.env.OPENAI_API_KEY
+      process.env.OPENAI_API_KEY,
+      tableSchema
     );
     res.status(200).json({ outputText });
   } catch (error) {

@@ -1,6 +1,25 @@
 import fetch from "isomorphic-unfetch";
 
-const translateToHuman = async (query, apiKey) => {
+const swimmingSchema = `
+Table rDistanceSwimming, columns = [startDate, endDate, value, creationDate]
+- Column value is a numerical column, Unit is meter
+- Column startDate is a DATETIME, the time when I started swimming. column sample Data 2022-03-16 12:39:57 +0800
+- Column endDate is a DATETIME,the time when I finished swimming. column sample Data 2022-03-16 12:39:57 +0800
+- Column creationDate is a DATETIME, the time when the swimming record was created. column sample Data 2022-03-16 12:39:57 +0800
+- Each data record represents one time swimming, and someone may swim multiple times in a day.
+`;
+
+const translateToHuman = async (
+  query,
+  apiKey,
+  tableSchema = swimmingSchema
+) => {
+  const prompt = `#SQLITE SQL
+  ${tableSchema}
+  Translate this SQL query into natural language:
+  "${query}"
+  Natural language query:
+  `;
   const response = await fetch("https://api.openai.com/v1/completions", {
     method: "POST",
     headers: {
@@ -8,7 +27,7 @@ const translateToHuman = async (query, apiKey) => {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      prompt: `Translate this SQL query into natural language:\n\n"${query}"\n\nNatural language query:`,
+      prompt,
       temperature: 0.5,
       max_tokens: 2048,
       n: 1,

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import translateHealth from "../../src/translateHealth";
+import translateToSQL from "../../src/translateToSQL";
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error(
@@ -13,7 +13,11 @@ export default async function handler(
 ) {
   const { inputText, tableSchema } = req.body;
   try {
-    const result = await translateHealth(inputText, process.env.OPENAI_API_KEY);
+    const result = await translateToSQL(
+      inputText,
+      process.env.OPENAI_API_KEY,
+      tableSchema
+    );
     // console.log(res);
     res.status(200).json({ outputText: result });
   } catch (error) {

@@ -16,9 +16,9 @@ export const Header = () => {
   return (
     <header className="flex flex-col sm:flex-row sm:justify-between w-full pb-8 px-6">
       <Link href="/" className="flex flex-col">
-        <h1 className="font-mono sm:text-xl tracking-tight">sqlTranslate</h1>
+        <h1 className="font-mono sm:text-xl tracking-tight">Max Swimming </h1>
         <p className="font-mono font-bold text-gray-600">
-          Human Language to SQL Translator
+          Human Language to Apple Health Swimming SQL Translator
         </p>
       </Link>
       <div className="flex items-center gap-3 pt-4">

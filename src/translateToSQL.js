@@ -18,7 +18,7 @@ const translateToSQL = async (query, apiKey, tableSchema = "") => {
       max_tokens: 2048,
       n: 1,
       stop: "\\n",
-      model: "code-davinci-002",
+      model: "text-davinci-003",
       frequency_penalty: 0.5,
       presence_penalty: 0.5,
       logprobs: 10,
